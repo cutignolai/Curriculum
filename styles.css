@@ -459,6 +459,8 @@ main {
   place-items: center;
   width: 102px;
   height: 102px;
+  flex-shrink: 0;
+  aspect-ratio: 1;
   border: 1px solid rgba(142, 197, 255, 0.26);
   border-radius: 50%;
   background:
@@ -1552,6 +1554,8 @@ entre todo
   .projects-grid-horizontal .project-tile {
     flex-basis: 100%;
     width: 100%;
+    aspect-ratio: auto;
+    min-height: 420px;
   }
 
   .projects-scroll-hint {
