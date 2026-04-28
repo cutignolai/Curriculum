@@ -1031,7 +1031,7 @@ function renderProfile(data) {
     }
 
     if (data.telefono) {
-      contactLinksList.appendChild(createContactLink(`tel:${String(data.telefono).replace(/\s+/g, "")}`, data.telefono));
+      contactLinksList.appendChild(createContactLink("https://wa.me/5491164074647", "Whatsapp"));
     }
 
     if (data.linkedin) {
