@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum | Ignacio Cutignola</title>
+  <meta
+    name="description"
+    content="Curriculum online de Ignacio Cutignola. Estudiante de Ingenieria Electronica con experiencia en software, sistemas y proyectos tecnicos."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top">Ignacio Cutignola</a>
+      <div class="site-header-actions">
+        <label class="language-switch" for="language-switch">
+          <span class="language-switch-label language-switch-label-es">ES</span>
+          <input id="language-switch" type="checkbox" aria-label="Cambiar idioma entre espanol e ingles">
+          <span class="language-switch-track" aria-hidden="true"></span>
+          <span class="language-switch-label language-switch-label-en">EN</span>
+        </label>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero-panel reveal">
+        <div class="hero-main">
+          <p class="section-label" id="hero-section-label">Curriculum / Portfolio</p>
+          <p class="hero-code" id="hero-code"></p>
+          <h1 id="hero-title"></h1>
+          <div class="hero-social-links" id="hero-social-links"></div>
+          <p class="hero-text" id="hero-text"></p>
+
+        </div>
+
+        <aside class="hero-aside">
+          <div class="identity-card">
+            <div class="identity-top">
+              <div class="avatar" id="profile-avatar"></div>
+              <div>
+                <p class="identity-name" id="profile-name"></p>
+                <p class="identity-role" id="profile-role"></p>
+              </div>
+            </div>
+
+            <div class="identity-grid" id="profile-details"></div>
+          </div>
+
+          <div class="hero-metrics">
+            <article>
+              <strong id="hero-about-title">Sobre mi...</strong>
+              <p id="hero-about-text">
+                Soy Ignacio Cutignola, estudiante de Ingenieria Electronica y Tecnico
+                Electronico. Me interesa trabajar en proyectos donde la logica, la
+                programacion y la tecnologia se conviertan en herramientas concretas para
+                resolver problemas reales.
+              </p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="overview-grid reveal" id="perfil">
+        <article class="overview-intro panel">
+          <p class="section-label" id="overview-label">Perfil</p>
+          <h2 id="overview-title">Base tecnica, curiosidad y compromiso con aprender haciendo.</h2>
+          <p id="overview-text-1">
+            Busco nuevas experiencias para ampliar conocimientos y profundizar mi
+            recorrido en entornos donde la electronica, la programacion y el analisis
+            tecnico tengan impacto real.
+          </p>
+          <p id="overview-text-2">
+            Me destaco por adaptarme rapido, trabajar con criterio y recibir feedback
+            como parte natural del proceso para mejorar resultados y elevar el nivel del
+            trabajo.
+          </p>
+        </article>
+
+        <article class="overview-focus panel">
+          <p class="section-label" id="strengths-label">Fortalezas</p>
+          <ul class="focus-list">
+            <li id="strength-item-1">Trabajo en equipo</li>
+            <li id="strength-item-2">Liderazgo</li>
+            <li id="strength-item-3">Consejeria</li>
+            <li id="strength-item-4">Aprendizaje constante</li>
+            <li id="strength-item-5">Pasion por la electronica</li>
+            <li id="strength-item-6">Comunicacion clara</li>
+          </ul>
+          <div class="overview-recognition">
+            <p class="section-label" id="recognition-label">Reconocimientos</p>
+            <p id="recognition-text">
+              <img src="./recurso/Herramientas/logro.png" alt="" aria-hidden="true">
+              <span>Beca de honor ITBA</span>
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="trajectory reveal" id="trayectoria">
+        <div class="section-heading">
+          <p class="section-label" id="trajectory-label">Trayectoria</p>
+          <h2 id="trajectory-title">Un recorrido por mi experiencia.</h2>
+        </div>
+
+        <div class="trajectory-layout" id="trajectory-list">
+          <div class="trajectory-line"></div>
+        </div>
+        <div class="trajectory-toggle-wrap" id="trajectory-toggle-wrap"></div>
+      </section>
+
+      <section class="projects-section reveal" id="proyectos">
+        <div class="section-heading">
+          <p class="section-label" id="projects-label">Proyectos</p>
+          <h2 id="projects-title">Mis proyectos y trabajos destacados.</h2>
+        </div>
+
+        <div class="projects-shell">
+          <div class="projects-scroll-hint" id="projects-scroll-hint">Desliza para ver mas proyectos</div>
+          <div class="projects-viewport projects-viewport-collapsed" id="projects-viewport">
+            <div class="projects-grid-dynamic" id="projects-list"></div>
+          </div>
+          <div class="projects-toggle-wrap" id="projects-toggle-wrap"></div>
+        </div>
+      </section>
+
+      <section class="capabilities reveal" id="capacidades">
+        <div class="section-heading">
+          <p class="section-label" id="capabilities-label">Capacidades</p>
+          <h2 id="capabilities-title">Herramientas, idiomas y formacion organizados como un sistema.</h2>
+        </div>
+
+        <div class="capabilities-layout">
+          <article class="capability-block panel">
+            <h3 id="stack-title">Stack tecnico</h3>
+            <ul class="chip-list">
+              <li><img src="./recurso/Herramientas/python.png" alt="Python"></li>
+              <li><img src="./recurso/Herramientas/TypeScript.png" alt="TypeScript"></li>
+              <li><img src="./recurso/Herramientas/node.png" alt="Node.js"></li>
+              <li><img src="./recurso/Herramientas/angular.png" alt="Angular"></li>
+              <li><img src="./recurso/Herramientas/postgres.png" alt="SQL"></li>
+              <li><img src="./recurso/Herramientas/redis.png" alt="REDIS"></li>
+              <li><img src="./recurso/Herramientas/mongodb.png" alt="MongoDB"></li>
+              <li><img src="./recurso/Herramientas/C.png" alt="C"></li>
+              <li><img src="./recurso/Herramientas/cpp.png" alt="C++"></li>
+              <li><img src="./recurso/Herramientas/asm.png" alt="Assmebly"></li>
+              <li><img src="./recurso/Herramientas/matlab.png" alt="Matlab"></li>
+              <li><img src="./recurso/Herramientas/eplan.jpg" alt="Eplan"></li>
+              <li><img src="./recurso/Herramientas/latex.png" alt="Latex"></li>
+              <li><img src="./recurso/Herramientas/fusion360.png" alt="Fusion360"></li>
+              <li><img src="./recurso/Herramientas/arduino.png" alt="Arduino"></li>
+              <li><img src="./recurso/Herramientas/raspberry.png" alt="Raspberry"></li>
+              <li><img src="./recurso/Herramientas/blender.png" alt="Blender"></li>
+              <li><img src="./recurso/Herramientas/altium.png" alt="Altium"></li>
+              <li><img src="./recurso/Herramientas/ubuntu.png" alt="Ubuntu"></li>
+              <li><img src="./recurso/Herramientas/ltspice.jpg" alt="Ltspice"></li>
+              <li><img src="./recurso/Herramientas/linux.png" alt="Linux"></li>
+            </ul>
+          </article>
+
+          <article class="education-block panel">
+            <h3 id="education-title">Educacion</h3>
+            <div class="education-list" id="education-list"></div>
+          </article>
+
+          <article class="language-block panel">
+            <h3 id="languages-title">Idiomas</h3>
+            <div class="language-item">
+              <span id="language-label-spanish">Español</span>
+              <strong id="language-level-spanish">Nativo</strong>
+            </div>
+            <div class="language-item">
+              <span id="language-label-english">Ingles</span>
+              <strong>Upper-Intermediate B2</strong>
+            </div>
+            <div class="language-item">
+              <span id="language-label-portuguese">Portugues</span>
+              <strong id="language-level-portuguese">Intermedio</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-panel reveal" id="contacto">
+        <div class="contact-copy">
+          <p class="section-label" id="contact-label">Contacto</p>
+          <h2 id="contact-title">Disponible para sumarme a equipos y proyectos con ambicion tecnica.</h2>
+          <p id="contact-text"></p>
+        </div>
+
+        <div class="contact-links panel">
+          <div id="contact-links-list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="profile-data.js"></script>
+  <script src="experiencia-data.js"></script>
+  <script src="education-data.js"></script>
+  <script src="projects-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
