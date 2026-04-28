@@ -340,7 +340,8 @@ function applyLanguage() {
 }
 
 function openPrintableCv() {
-  window.open(`./cv-print.html?print=1&lang=${currentLanguage}`, "_blank", "noopener");
+  const file = currentLanguage === "en" ? "./cv-print-english.html" : "./cv-print.html";
+  window.open(`${file}?print=1`, "_blank", "noopener");
 }
 
 function createHeroDownloadButton() {

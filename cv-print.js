@@ -1,7 +1,7 @@
 const printParams = new URLSearchParams(window.location.search);
 const storedPrintLanguage = window.localStorage.getItem("cv-language");
 const PRINT_LANGUAGE =
-  printParams.get("lang") === "en" || storedPrintLanguage === "en" ? "en" : "es";
+  window.CV_LANGUAGE === "en" || printParams.get("lang") === "en" || storedPrintLanguage === "en" ? "en" : "es";
 const printProfile = window.profileData || {};
 const printExperience = Array.isArray(window.experienceData) ? window.experienceData : [];
 const printEducation = Array.isArray(window.educationData) ? window.educationData : [];

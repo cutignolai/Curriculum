@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV PDF | Ignacio Cutignola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="cv-print.css">
+</head>
+<body>
+  <main class="cv-page" id="cv-page">
+    <section class="cv-top">
+      <section class="cv-top-block cv-identity">
+        <p class="cv-eyebrow" id="cv-eyebrow">Curriculum Vitae</p>
+        <div class="cv-header-row">
+          <div class="cv-profile-photo" id="cv-profile-photo"></div>
+          <div class="cv-header-copy">
+            <div class="cv-name-row">
+              <h1 id="cv-name"></h1>
+              <div class="cv-name-location" id="cv-location"></div>
+            </div>
+            <p class="cv-role" id="cv-role"></p>
+          </div>
+        </div>
+        <div class="cv-contact-inline">
+          <div><span id="cv-contact-label-email">Email</span><strong id="cv-email"></strong></div>
+          <div><span id="cv-contact-label-phone">Phone</span><strong id="cv-phone"></strong></div>
+          <div>
+            <span class="cv-contact-label-with-icon">
+              <img src="./recurso/Herramientas/linkedin.png" alt="">
+              <span id="cv-contact-label-linkedin">LinkedIn</span>
+            </span>
+            <strong id="cv-linkedin"></strong>
+          </div>
+          <div>
+            <span class="cv-contact-label-with-icon">
+              <img src="./recurso/Herramientas/github.png" alt="">
+              <span id="cv-contact-label-github">GitHub</span>
+            </span>
+            <strong id="cv-github"></strong>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="cv-main">
+      <section class="cv-section">
+        <div class="cv-section-heading">
+          <p class="cv-section-label" id="cv-section-profile">Profile</p>
+        </div>
+        <div class="cv-profile-copy">
+          <p id="cv-profile-summary"></p>
+        </div>
+      </section>
+
+      <section class="cv-section cv-two-column">
+        <section>
+          <div class="cv-section-heading">
+            <p class="cv-section-label" id="cv-section-experience">Work Experience</p>
+          </div>
+          <div class="cv-timeline" id="cv-experience"></div>
+        </section>
+
+        <section class="cv-side-column">
+          <div class="cv-section-heading">
+            <p class="cv-section-label" id="cv-section-recognition">Awards</p>
+          </div>
+          <p class="cv-highlight cv-highlight-with-icon">
+            <img src="./recurso/Herramientas/logro.png" alt="">
+            <span id="cv-recognition-text">ITBA Honor Scholarship</span>
+          </p>
+
+          <section class="cv-side-section">
+            <div class="cv-section-heading">
+              <p class="cv-section-label" id="cv-section-education">Education</p>
+            </div>
+            <div class="cv-education-list" id="cv-education"></div>
+          </section>
+
+          <section class="cv-side-section">
+            <div class="cv-section-heading">
+              <p class="cv-section-label" id="cv-section-languages">Languages</p>
+            </div>
+            <div class="cv-language-list cv-language-list-main">
+              <div class="cv-language-item">
+                <span id="cv-language-spanish-label">Spanish</span>
+                <strong id="cv-language-spanish-level">Native</strong>
+              </div>
+              <div class="cv-language-item">
+                <span id="cv-language-english-label">English</span>
+                <strong id="cv-language-english-level">Upper-Intermediate B2</strong>
+              </div>
+              <div class="cv-language-item">
+                <span id="cv-language-portuguese-label">Portuguese</span>
+                <strong id="cv-language-portuguese-level">Intermediate</strong>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section class="cv-section">
+        <div class="cv-section-heading">
+          <p class="cv-section-label" id="cv-section-stack">Tech Stack</p>
+        </div>
+        <div class="cv-stack-grid" id="cv-stack"></div>
+      </section>
+
+      <section class="cv-section cv-projects-section">
+        <div class="cv-page-banner">
+          <div class="cv-page-banner-main">
+            <strong id="cv-banner-name"></strong>
+            <span id="cv-banner-role"></span>
+          </div>
+          <div class="cv-page-banner-contact">
+            <span id="cv-banner-email"></span>
+            <span id="cv-banner-phone"></span>
+          </div>
+        </div>
+        <div class="cv-section-heading">
+          <p class="cv-section-label" id="cv-section-projects">Projects</p>
+        </div>
+        <div class="cv-projects-list" id="cv-projects"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>window.CV_LANGUAGE = "en";</script>
+  <script src="profile-data.js"></script>
+  <script src="experiencia-data.js"></script>
+  <script src="education-data.js"></script>
+  <script src="projects-data.js"></script>
+  <script src="cv-print.js"></script>
+</body>
+</html>

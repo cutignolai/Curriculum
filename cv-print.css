@@ -4,13 +4,13 @@
 }
 
 :root {
-  --paper: #f7f3ec;
-  --ink: #1f1a17;
-  --muted: #655b53;
-  --line: #d6ccc2;
-  --accent: #8f5f3c;
-  --accent-soft: #eadfd3;
-  --panel: #fffdf9;
+  --paper: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #cbd5e1;
+  --accent: rgba(10, 102, 194, 0.75);
+  --accent-soft: rgba(10, 102, 194, 0.10);
+  --panel: #f8fafc;
 }
 
 * {
@@ -21,7 +21,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #d9d3cb;
+  background: #e2e8f0;
   color: var(--ink);
   font-family: "IBM Plex Sans", sans-serif;
 }
@@ -37,7 +37,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   background: var(--paper);
-  box-shadow: 0 20px 60px rgba(48, 34, 24, 0.12);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
 }
 
 .cv-top {
@@ -46,9 +46,9 @@ body {
   gap: 0;
   padding: 11mm 12mm 8mm;
   background:
-    linear-gradient(180deg, rgba(143, 95, 60, 0.08), rgba(143, 95, 60, 0.02)),
-    #efe7de;
-  border-bottom: 1px solid rgba(143, 95, 60, 0.15);
+    linear-gradient(180deg, rgba(10, 102, 194, 0.08), rgba(10, 102, 194, 0.02)),
+    #e8f3fc;
+  border-bottom: 1px solid rgba(10, 102, 194, 0.15);
 }
 
 .cv-main {
@@ -117,7 +117,7 @@ body {
 .cv-profile-photo {
   width: 24mm;
   height: 24mm;
-  border: 1px solid rgba(143, 95, 60, 0.16);
+  border: 1px solid rgba(10, 102, 194, 0.16);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   overflow: hidden;
@@ -255,7 +255,7 @@ body {
 
 .cv-chip-list li {
   padding: 2mm 3.2mm;
-  border: 1px solid rgba(143, 95, 60, 0.18);
+  border: 1px solid rgba(10, 102, 194, 0.18);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.5);
   font-size: 8.8pt;
@@ -330,7 +330,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.2mm;
-  border: 1px solid rgba(143, 95, 60, 0.14);
+  border: 1px solid rgba(10, 102, 194, 0.14);
   border-radius: 4mm;
   background: rgba(255, 255, 255, 0.55);
 }
@@ -350,7 +350,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.2mm;
-  border: 1px solid rgba(143, 95, 60, 0.14);
+  border: 1px solid rgba(10, 102, 194, 0.14);
   border-radius: 4mm;
   background: rgba(255, 255, 255, 0.55);
 }
@@ -407,7 +407,7 @@ body {
   padding: 1mm 2mm;
   border-radius: 999px;
   background: var(--accent-soft);
-  color: #4d392b;
+  color: rgba(10, 102, 194, 0.75);
   font-size: 7.5pt;
 }
 
@@ -426,7 +426,7 @@ body {
 
 .cv-language-list-main .cv-language-item {
   padding: 2.5mm 3mm;
-  border: 1px solid rgba(143, 95, 60, 0.14);
+  border: 1px solid rgba(10, 102, 194, 0.14);
   border-radius: 4mm;
   background: rgba(255, 255, 255, 0.45);
 }
@@ -445,7 +445,7 @@ body {
   width: 100%;
   max-width: 9.7mm;
   padding: 0.8mm;
-  border: 1px solid rgba(143, 95, 60, 0.14);
+  border: 1px solid rgba(10, 102, 194, 0.14);
   border-radius: 2.6mm;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -473,11 +473,11 @@ body {
   margin-left: -8mm;
   margin-right: -8mm;
   margin-bottom: 4.5mm;
-  border: 1px solid rgba(143, 95, 60, 0.16);
+  border: 1px solid rgba(10, 102, 194, 0.16);
   border-radius: 0;
   background:
-    linear-gradient(135deg, rgba(143, 95, 60, 0.16), rgba(143, 95, 60, 0.05)),
-    rgba(234, 223, 211, 0.5);
+    linear-gradient(135deg, rgba(10, 102, 194, 0.16), rgba(10, 102, 194, 0.05)),
+    rgba(10, 102, 194, 0.08);
 }
 
 .cv-page-banner-main {
@@ -509,7 +509,7 @@ body {
 .cv-page-banner-contact span::after {
   content: "•";
   margin-left: 3mm;
-  color: rgba(143, 95, 60, 0.55);
+  color: rgba(10, 102, 194, 0.55);
 }
 
 .cv-page-banner-contact span:last-child::after {
@@ -519,7 +519,7 @@ body {
 .cv-language-list-main .cv-language-item + .cv-language-item {
   margin-top: 0;
   padding-top: 2.5mm;
-  border-top: 1px solid rgba(143, 95, 60, 0.14);
+  border-top: 1px solid rgba(10, 102, 194, 0.14);
 }
 
 @media screen and (max-width: 1100px) {
@@ -561,7 +561,7 @@ body {
 
   .cv-top-block + .cv-top-block {
     border-left: 0;
-    border-top: 1px solid rgba(143, 95, 60, 0.14);
+    border-top: 1px solid rgba(10, 102, 194, 0.14);
     padding-top: 18px;
   }
 
