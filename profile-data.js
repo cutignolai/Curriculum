@@ -10,7 +10,7 @@ window.profileData = {
   },
   "media-ubicacion": "C:/00-Personal/Curriculum/recurso/Perfil/Bandera Argentina HD.mp4",
   email: "cutignolai@gmail.com",
-  telefono: "+54 9 11 6407-4647",
+  telefono: "+54 9 11 1234-5678",
   linkedin: "https://www.linkedin.com/in/ignacio-cutignola-4a6865201/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BFlxjngCtQk2S5rIqUufRVg%3D%3D",
   linkedinLabel: "ignacio-cutignola",
   github: "https://github.com/cutignolai",
