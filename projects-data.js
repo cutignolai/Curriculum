@@ -5,6 +5,37 @@ window.projectsData = [
       en: "Academic project",
     },
     titulo: {
+      es: "Reproductor MP3 embebido",
+      en: "Embedded MP3 player",
+    },
+    descripcion: {
+      es: "Reproductor de MP3 sobre un ARM Cortex-M4 (FRDM-K64F) con µC/OS-III: lee la micro SD, decodifica el audio y lo reproduce por DAC con DMA, con ecualizador de 4 bandas y vúmetro en una matriz LED WS2812.",
+      en: "MP3 player on an ARM Cortex-M4 (FRDM-K64F) running µC/OS-III: it reads a micro SD card, decodes the audio, and plays it through the DAC via DMA, with a 4-band equalizer and a VU meter on a WS2812 LED matrix.",
+    },
+    descripcionCv: {
+      es: "Firmware en C para un reproductor de MP3 sobre la placa NXP FRDM-K64F (ARM Cortex-M4F a 120 MHz) con el RTOS µC/OS-III. Lee los archivos de una micro SD con FatFs, los decodifica con la librería Helix y reproduce el audio por el DAC de 12 bits mediante DMA con buffer ping-pong, temporizado por PIT a la frecuencia de muestreo. Incluye un ecualizador de 4 bandas con biquads de CMSIS-DSP, lectura de metadatos ID3v2, control de volumen, interfaz con LCD 16x2, encoder y pulsadores, vúmetro en una matriz LED WS2812 y una PCB propia diseñada en Altium Designer.",
+      en: "C firmware for an MP3 player on the NXP FRDM-K64F board (ARM Cortex-M4F at 120 MHz) running the µC/OS-III RTOS. It reads files from a micro SD card with FatFs, decodes them with the Helix library, and plays the audio through the 12-bit DAC using DMA with a ping-pong buffer, timed by the PIT at the sample rate. It includes a 4-band equalizer built with CMSIS-DSP biquads, ID3v2 metadata reading, volume control, a user interface with a 16x2 LCD, rotary encoder, and push buttons, a VU meter on a WS2812 LED matrix, and a custom PCB designed in Altium Designer.",
+    },
+    media: [
+      "./recurso/Proyectos/MP3-vumetro.gif",
+      "./recurso/Proyectos/MP3-prototipo.jpg",
+    ],
+    github: "https://github.com/cutignolai/MP3-Player",
+    githubTitulo: {
+      es: "Repositorio en GitHub",
+      en: "GitHub repository",
+    },
+    herramientas: [
+      "./recurso/Herramientas/C.png",
+      "./recurso/Herramientas/altium.png",
+    ],
+  },
+  {
+    clase: {
+      es: "Proyecto académico",
+      en: "Academic project",
+    },
+    titulo: {
       es: "Clasificador de colores",
       en: "Color classifier",
     },
