@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420" viewBox="0 0 420 420" fill="none" stroke="#8ec5ff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Traces with 45° bends, each ending on a pad -->
+  <path d="M28 52 H118 L148 82 V168"/>
+  <path d="M28 76 H96 L120 100 V196 L140 216 H196"/>
+  <path d="M180 28 V64 L206 90 H290"/>
+  <path d="M206 28 V52 L222 68 H330 L362 100 V150"/>
+  <path d="M392 196 H330 L306 220 V262"/>
+  <path d="M40 260 H88 L118 290 V372"/>
+  <path d="M64 236 V250 L74 260"/>
+  <path d="M150 392 V330 L176 304 H226"/>
+  <path d="M392 330 H352 L330 352 V392"/>
+  <path d="M250 120 V168 L270 188 H300"/>
+
+  <!-- Chip footprint -->
+  <rect x="226" y="276" width="64" height="48" rx="4"/>
+  <path d="M238 276 V262 M254 276 V262 M270 276 V262 M238 324 V338 M254 324 V338 M270 324 V338"/>
+  <circle cx="236" cy="286" r="2" fill="#8ec5ff" stroke="none"/>
+
+  <!-- Pads -->
+  <g stroke-width="1.4">
+    <circle cx="28" cy="52" r="4"/>
+    <circle cx="148" cy="168" r="4"/>
+    <circle cx="28" cy="76" r="4"/>
+    <circle cx="196" cy="216" r="4"/>
+    <circle cx="180" cy="28" r="4"/>
+    <circle cx="290" cy="90" r="4"/>
+    <circle cx="206" cy="28" r="4"/>
+    <circle cx="362" cy="150" r="4"/>
+    <circle cx="392" cy="196" r="4"/>
+    <circle cx="40" cy="260" r="4"/>
+    <circle cx="118" cy="372" r="4"/>
+    <circle cx="64" cy="236" r="4"/>
+    <circle cx="150" cy="392" r="4"/>
+    <circle cx="392" cy="330" r="4"/>
+    <circle cx="330" cy="392" r="4"/>
+    <circle cx="250" cy="120" r="4"/>
+    <circle cx="300" cy="188" r="4"/>
+  </g>
+
+  <!-- Vias -->
+  <g fill="#8ec5ff" stroke="none">
+    <circle cx="306" cy="262" r="3"/>
+    <circle cx="226" cy="304" r="3"/>
+    <circle cx="74" cy="160" r="2.5"/>
+    <circle cx="350" cy="48" r="2.5"/>
+    <circle cx="190" cy="140" r="2.5"/>
+    <circle cx="372" cy="270" r="2.5"/>
+  </g>
+</svg>

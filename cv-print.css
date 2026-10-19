@@ -1,3 +1,41 @@
+/* Static, self-hosted font files: Chrome embeds them as TrueType instead of Type3,
+   which keeps the PDF text readable for every ATS parser. */
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
+  src: url("recurso/Fuentes/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 500;
+  src: url("recurso/Fuentes/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 600;
+  src: url("recurso/Fuentes/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 700;
+  src: url("recurso/Fuentes/ibm-plex-sans-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  font-weight: 500;
+  src: url("recurso/Fuentes/ibm-plex-serif-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  font-weight: 600;
+  src: url("recurso/Fuentes/ibm-plex-serif-latin-600-normal.woff2") format("woff2");
+}
+
 @page {
   size: A4;
   margin: 10mm 0;
@@ -232,13 +270,18 @@ a {
   min-width: 0;
 }
 
+/* Date sits right under the title (not floated to the right) so text extractors
+   always read it together with the role it belongs to. */
 .cv-experience-item-header,
 .cv-project-item-header {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4mm;
+  flex-direction: column;
+  gap: 0.3mm;
   margin-bottom: 0.8mm;
+}
+
+.cv-nowrap {
+  white-space: nowrap;
 }
 
 .cv-experience-item h3,

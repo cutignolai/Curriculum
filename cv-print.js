@@ -233,12 +233,20 @@ function createPrintLogo(logo, label, className) {
   `;
 }
 
+// Text extractors drop the hyphen when a hyphenated word wraps ("Sallen-Key" -> "SallenKey"),
+// so hyphenated words are kept on a single line.
+function keepHyphenatedWords(text) {
+  return String(text || "").replace(/\S*\w-\w\S*/g, (word) => `<span class="cv-nowrap">${word}</span>`);
+}
+
 function createPrintDescription(description) {
   if (Array.isArray(description)) {
-    return `<ul class="cv-bullets">${description.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+    return `<ul class="cv-bullets">${description
+      .map((line) => `<li>${keepHyphenatedWords(line)}</li>`)
+      .join("")}</ul>`;
   }
 
-  return `<p>${description}</p>`;
+  return `<p>${keepHyphenatedWords(description)}</p>`;
 }
 
 function createPrintVideoLink(url, label) {
@@ -358,14 +366,9 @@ function renderProjects() {
   printProjects.filter((item) => item.enCv !== false).forEach((item) => {
     const article = document.createElement("article");
     article.className = "cv-project-item";
-    const toolMarkup = Array.isArray(item.herramientas)
-      ? item.herramientas
-          .map(
-            (tool) => `
-              <span class="cv-project-tool-chip">${getToolLabel(tool)}</span>
-            `
-          )
-          .join("")
+    const tools = Array.isArray(item.herramientas) ? item.herramientas.map(getToolLabel).filter(Boolean) : [];
+    const toolMarkup = tools.length
+      ? `<p class="cv-item-tools"><strong>${t("tools")}:</strong> ${tools.join(", ")}</p>`
       : "";
     const videoMarkup =
       createPrintVideoLink(item.video, item.videoTitulo) +
@@ -377,9 +380,9 @@ function renderProjects() {
         <h3>${pickLocalized(item.titulo)}</h3>
         <div class="cv-project-type">${pickLocalized(item.clase)}</div>
       </div>
-      <p>${pickLocalized(item.descripcionCv || item.descripcion)}</p>
+      <p>${keepHyphenatedWords(pickLocalized(item.descripcionCv || item.descripcion))}</p>
       ${videoMarkup}
-      <div class="cv-project-tools">${toolMarkup}</div>
+      ${toolMarkup}
     `;
     container.appendChild(article);
   });

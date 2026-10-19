@@ -49,15 +49,15 @@ a {
   pointer-events: none;
 }
 
+/* Faint PCB traces behind everything, fading out toward the edges. */
 .noise {
   inset: 0;
-  opacity: 0.08;
+  opacity: 0.14;
   z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(circle at center, black 28%, transparent 85%);
+  background-image: url("recurso/pcb-pattern.svg");
+  background-size: 420px 420px;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 90%);
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 90%);
 }
 
 .orb {
@@ -467,6 +467,27 @@ main {
   transform: translateY(-2px);
   border-color: rgba(142, 197, 255, 0.42);
   background: rgba(142, 197, 255, 0.1);
+}
+
+/* The CV download is the main action of the page, so it gets a filled accent style. */
+.hero-social-links .hero-social-download {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #04101f;
+  box-shadow: 0 10px 30px var(--glow);
+}
+
+.hero-social-links .hero-social-download:hover,
+.hero-social-links .hero-social-download:focus-visible {
+  border-color: transparent;
+  background: linear-gradient(135deg, #a6d3ff, #7df4e0);
+  box-shadow: 0 14px 36px rgba(94, 240, 215, 0.32);
+}
+
+.hero-social-links .hero-social-download img {
+  padding: 2px;
+  border-radius: 4px;
+  background: #ffffff;
 }
 
 .hero-social-download img {
@@ -1134,7 +1155,6 @@ entre todo
   background: var(--bg-soft);
   box-shadow: 0 0 20px var(--glow);
 }
-
 .trajectory-index {
   display: block;
   margin-bottom: 10px;
