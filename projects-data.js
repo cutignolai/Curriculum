@@ -13,10 +13,10 @@ window.projectsData = [
       en: "Machine that sorts products by color onto a rotating disc, in automatic or manual mode, with a conveyor belt, sensors, a stepper motor, Arduino Nano control, and 3D-designed parts.",
     },
     descripcionCv: {
-      es: "Máquina desarrollada en equipo que clasifica productos por color en un disco giratorio, con modo automático y manual. Integra una cinta transportadora con motor de continua, sensor de color, sensor inductivo para homing, sensores infrarrojos de detección y llegada, un motor paso a paso, control con Arduino Nano, panel de seguridad para el operario y piezas diseñadas y modeladas en 3D.",
-      en: "Team-built machine that sorts products by color onto a rotating disc, with automatic and manual modes. It integrates a DC-motor conveyor belt, a color sensor, an inductive sensor for homing, infrared sensors for detection and arrival, a stepper motor, Arduino Nano control, an operator safety panel, and 3D-designed and modeled parts.",
+      es: "Máquina desarrollada en equipo que clasifica productos por color en un disco giratorio, con modo automático y manual. Integra una cinta transportadora con motor de continua, sensor de color, sensor inductivo para homing, sensores infrarrojos de detección y llegada, un motor paso a paso, control con Arduino Nano, panel de seguridad para el operario, planos del tablero eléctrico diseñados en EPLAN y piezas diseñadas y modeladas en 3D.",
+      en: "Team-built machine that sorts products by color onto a rotating disc, with automatic and manual modes. It integrates a DC-motor conveyor belt, a color sensor, an inductive sensor for homing, infrared sensors for detection and arrival, a stepper motor, Arduino Nano control, an operator safety panel, electrical panel drawings designed in EPLAN, and 3D-designed and modeled parts.",
     },
-    media: [],
+    media: ["./recurso/Proyectos/Clasificador.jpg"],
     linkedin: "https://lnkd.in/p/dekPENSN",
     linkedinTitulo: {
       es: "Publicación en LinkedIn",
@@ -26,6 +26,7 @@ window.projectsData = [
       "./recurso/Herramientas/arduino.png",
       "./recurso/Herramientas/C.png",
       "./recurso/Herramientas/altium.png",
+      "./recurso/Herramientas/eplan.jpg",
       "./recurso/Herramientas/fusion360.png",
     ],
   },

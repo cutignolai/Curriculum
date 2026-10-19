@@ -36,6 +36,8 @@ const translations = {
       contact: "Contacto",
     },
     switchAriaLabel: "Cambiar idioma entre español e inglés",
+    headerRole: "Desarrollador de Firmware · Sistemas Embebidos",
+    headerDegree: "Ingeniería Electrónica",
     heroSectionLabel: "Currículum / Portfolio",
     heroAboutTitle: "Sobre mí...",
     heroAboutText:
@@ -127,6 +129,8 @@ const translations = {
       contact: "Contact",
     },
     switchAriaLabel: "Switch language between Spanish and English",
+    headerRole: "Firmware Developer · Embedded Systems",
+    headerDegree: "Electronics Engineering",
     heroSectionLabel: "Resume / Portfolio",
     heroAboutTitle: "About me...",
     heroAboutText:
@@ -282,6 +286,8 @@ function applyStaticTranslations() {
   setTextContent("#nav-projects", translations[currentLanguage].nav.projects);
   setTextContent("#nav-capabilities", translations[currentLanguage].nav.capabilities);
   setTextContent("#nav-contact", translations[currentLanguage].nav.contact);
+  setTextContent("#header-role", translations[currentLanguage].headerRole);
+  setTextContent("#header-degree", translations[currentLanguage].headerDegree);
   setTextContent("#hero-section-label", translations[currentLanguage].heroSectionLabel);
   setTextContent("#hero-about-title", translations[currentLanguage].heroAboutTitle);
   setTextContent("#hero-about-text", translations[currentLanguage].heroAboutText);
@@ -438,7 +444,7 @@ function createProfileField(label, value, options = {}) {
     const mediaContainer = document.createElement("div");
     mediaContainer.className = "identity-field-media";
     mediaContainer.setAttribute("aria-hidden", "true");
-    mediaContainer.appendChild(createMediaLayer(mediaPath, label));
+    mediaContainer.appendChild(createMediaLayer(mediaPath, label, undefined, options.mediaPoster || ""));
     wrapper.appendChild(mediaContainer);
   }
 
@@ -479,10 +485,43 @@ function createProfileField(label, value, options = {}) {
   return wrapper;
 }
 
-function createContactLink(href, label) {
+const WHATSAPP_ICON = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="12" fill="#25d366"></circle>
+    <path fill="#ffffff" d="M12 5.2a6.8 6.8 0 0 0-5.86 10.26L5.2 18.8l3.43-.9A6.8 6.8 0 1 0 12 5.2Zm0 12.4a5.6 5.6 0 0 1-2.86-.78l-.2-.12-2.04.53.55-1.98-.13-.21A5.6 5.6 0 1 1 12 17.6Zm3.07-4.2c-.17-.08-1-.49-1.15-.55-.15-.06-.27-.08-.38.09-.11.17-.44.55-.54.66-.1.11-.2.13-.37.04a4.6 4.6 0 0 1-2.3-2c-.17-.3.17-.28.5-.93.05-.11.03-.21-.02-.3l-.52-1.24c-.13-.33-.27-.28-.37-.29h-.32a.6.6 0 0 0-.44.21 1.85 1.85 0 0 0-.58 1.38 3.2 3.2 0 0 0 .68 1.71 7.35 7.35 0 0 0 2.82 2.49c1.05.45 1.46.49 1.98.41.32-.05 1-.41 1.14-.8.14-.4.14-.73.1-.8-.04-.07-.15-.11-.32-.19Z"></path>
+  </svg>
+`;
+
+function createContactLink(href, label, icon = "") {
   const link = document.createElement("a");
+  const text = document.createElement("span");
+  const arrow = document.createElement("span");
   link.href = href;
-  link.textContent = label;
+  link.className = "contact-link";
+  text.textContent = label;
+  arrow.className = "contact-link-arrow";
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "↗";
+
+  if (icon) {
+    const iconWrap = document.createElement("span");
+    iconWrap.className = "contact-link-icon";
+    iconWrap.setAttribute("aria-hidden", "true");
+
+    if (icon.trim().startsWith("<svg")) {
+      iconWrap.innerHTML = icon;
+    } else {
+      const image = document.createElement("img");
+      image.src = icon;
+      image.alt = "";
+      iconWrap.appendChild(image);
+    }
+
+    link.appendChild(iconWrap);
+  }
+
+  link.appendChild(text);
+  link.appendChild(arrow);
 
   if (href.startsWith("http")) {
     link.target = "_blank";
@@ -551,10 +590,10 @@ function createTrajectoryItem(item, index) {
   article.className = "trajectory-item trajectory-item-reveal";
   article.style.transitionDelay = `${Math.min(index * 90, 360)}ms`;
 
-  const formattedIndex = String(index + 1).padStart(2, "0");
   const role = localizedText(item.puesto);
   const company = localizedText(item.empresa);
   const period = localizedText(item.periodo);
+  const startYear = period.match(/\d{4}/)?.[0] || String(index + 1).padStart(2, "0");
   const description = localizedText(item.descripcion);
   const logoMarkup = createLogoMarkup(item.logo, company, "trajectory-logo");
   const extraLogosMarkup = Array.isArray(item.logos) && item.logos.length > 0
@@ -563,7 +602,7 @@ function createTrajectoryItem(item, index) {
 
   article.innerHTML = `
     <div class="trajectory-meta">
-      <span class="trajectory-index">${formattedIndex}</span>
+      <span class="trajectory-index">${startYear}</span>
       <p>${period}</p>
     </div>
     <div class="trajectory-card panel">
@@ -653,12 +692,15 @@ function createToolLogo(path, index, title) {
   return item;
 }
 
-function createMediaLayer(path, title, className = "project-tile-media-layer") {
+function createMediaLayer(path, title, className = "project-tile-media-layer", poster = "") {
   const mediaLayer = document.createElement("div");
   mediaLayer.className = className;
 
   if (isVideoPath(path)) {
     const video = document.createElement("video");
+    if (poster) {
+      video.poster = poster;
+    }
     video.src = path;
     video.muted = true;
     video.loop = true;
@@ -687,7 +729,22 @@ function setupProjectMedia(article, item) {
     ? item.media.filter(Boolean)
     : [];
 
-  if (!mediaContainer || mediaList.length === 0) {
+  if (!mediaContainer) {
+    return;
+  }
+
+  if (mediaList.length === 0) {
+    const mainTool = Array.isArray(item.herramientas) ? item.herramientas[0] : "";
+    mediaContainer.classList.add("project-tile-media-empty");
+
+    if (mainTool) {
+      const icon = document.createElement("img");
+      icon.src = mainTool;
+      icon.alt = "";
+      icon.loading = "lazy";
+      mediaContainer.appendChild(icon);
+    }
+
     return;
   }
 
@@ -740,14 +797,7 @@ function setupProjectMedia(article, item) {
     }, 1800);
   };
 
-  let mediaLoaded = false;
-  const loadMedia = () => {
-    if (!mediaLoaded) {
-      mediaLoaded = true;
-      renderMedia(currentMediaIndex, { immediate: true });
-    }
-  };
-
+  renderMedia(currentMediaIndex, { immediate: true });
   article.classList.add("project-tile-has-media");
 
   if (touchDevice) {
@@ -755,7 +805,6 @@ function setupProjectMedia(article, item) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            loadMedia();
             startRotation();
           } else {
             stopRotation();
@@ -768,10 +817,7 @@ function setupProjectMedia(article, item) {
     return;
   }
 
-  article.addEventListener("mouseenter", () => {
-    loadMedia();
-    startRotation();
-  });
+  article.addEventListener("mouseenter", startRotation);
   article.addEventListener("mouseleave", () => {
     stopRotation();
 
@@ -925,13 +971,10 @@ function renderTrajectory(items) {
   }
 
   const hiddenCount = Math.max(items.length - INITIAL_VISIBLE_EXPERIENCES, 0);
+  const visibleItems = showingAllExperiences ? items : items.slice(0, INITIAL_VISIBLE_EXPERIENCES);
 
-  trajectoryList.classList.toggle(
-    "trajectory-layout-collapsed",
-    hiddenCount > 0 && !showingAllExperiences
-  );
   trajectoryList.innerHTML = '<div class="trajectory-line"></div>';
-  items.forEach((item, index) => {
+  visibleItems.forEach((item, index) => {
     const trajectoryItem = createTrajectoryItem(item, index);
     trajectoryList.appendChild(trajectoryItem);
     observeReveal(trajectoryItem);
@@ -1116,6 +1159,7 @@ function renderProfile(data) {
       createProfileField(translations[currentLanguage].profileFields.location, localizedText(data.ubicacion), {
         className: "identity-field identity-field-location",
         mediaPath: data["media-ubicacion"] || data.mediaUbicacion || "",
+        mediaPoster: data["media-ubicacion-poster"] || "",
       })
     );
   }
@@ -1150,22 +1194,32 @@ function renderProfile(data) {
     contactLinksList.innerHTML = "";
 
     if (data.email) {
-      contactLinksList.appendChild(createContactLink(`mailto:${data.email}`, data.email));
+      contactLinksList.appendChild(
+        createContactLink(`mailto:${data.email}`, data.email, "./recurso/Herramientas/gmail.png")
+      );
     }
 
     if (data.telefono) {
-      contactLinksList.appendChild(createContactLink("https://wa.me/5491164074647", "WhatsApp"));
+      contactLinksList.appendChild(createContactLink("https://wa.me/5491164074647", "WhatsApp", WHATSAPP_ICON));
     }
 
     if (data.linkedin) {
       contactLinksList.appendChild(
-        createContactLink(data.linkedin, translations[currentLanguage].contactLinks.linkedin)
+        createContactLink(
+          data.linkedin,
+          translations[currentLanguage].contactLinks.linkedin,
+          "./recurso/Herramientas/linkedin.png"
+        )
       );
     }
 
     if (data.github) {
       contactLinksList.appendChild(
-        createContactLink(data.github, translations[currentLanguage].contactLinks.github)
+        createContactLink(
+          data.github,
+          translations[currentLanguage].contactLinks.github,
+          "./recurso/Herramientas/github.png"
+        )
       );
     }
   }

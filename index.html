@@ -66,16 +66,22 @@
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>
 
+  <label class="language-switch language-switch-floating" for="language-switch">
+    <span class="language-switch-label language-switch-label-es">ES</span>
+    <input id="language-switch" type="checkbox" aria-label="Cambiar idioma entre español e inglés">
+    <span class="language-switch-track" aria-hidden="true"></span>
+    <span class="language-switch-label language-switch-label-en">EN</span>
+  </label>
+
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="#top">Ignacio Cutignola</a>
+      <p class="site-header-role" id="header-role">Desarrollador de Firmware · Sistemas Embebidos</p>
       <div class="site-header-actions">
-        <label class="language-switch" for="language-switch">
-          <span class="language-switch-label language-switch-label-es">ES</span>
-          <input id="language-switch" type="checkbox" aria-label="Cambiar idioma entre español e inglés">
-          <span class="language-switch-track" aria-hidden="true"></span>
-          <span class="language-switch-label language-switch-label-en">EN</span>
-        </label>
+        <div class="site-header-degree">
+          <span id="header-degree">Ingeniería Electrónica</span>
+          <img src="./recurso/Educacion/itba.png" alt="ITBA">
+        </div>
       </div>
     </header>
 
@@ -203,14 +209,17 @@
             <div class="language-item">
               <span id="language-label-spanish">Español</span>
               <strong id="language-level-spanish">Nativo</strong>
+              <div class="language-bar" aria-hidden="true"><span style="--level: 100%"></span></div>
             </div>
             <div class="language-item">
               <span id="language-label-english">Inglés</span>
               <strong>Upper-Intermediate B2</strong>
+              <div class="language-bar" aria-hidden="true"><span style="--level: 75%"></span></div>
             </div>
             <div class="language-item">
               <span id="language-label-portuguese">Portugués</span>
               <strong id="language-level-portuguese">Intermedio</strong>
+              <div class="language-bar" aria-hidden="true"><span style="--level: 50%"></span></div>
             </div>
           </article>
         </div>
