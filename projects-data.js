@@ -36,6 +36,31 @@ window.projectsData = [
       en: "Academic project",
     },
     titulo: {
+      es: "Control de acceso con RTOS",
+      en: "RTOS-based access control",
+    },
+    descripcion: {
+      es: "Cerradura electrónica sobre un ARM Cortex-M4 (FRDM-K64F) con µC/OS-III: identificación por tarjeta de banda magnética o encoder, PIN, display de 7 segmentos, penalizaciones y bloqueo tras 3 intentos fallidos.",
+      en: "Electronic lock on an ARM Cortex-M4 (FRDM-K64F) running µC/OS-III: identification by magnetic stripe card or encoder, PIN entry, a 7-segment display, time penalties, and lockout after 3 failed attempts.",
+    },
+    descripcionCv: {
+      es: "Firmware en C de un sistema de control de acceso sobre la placa NXP FRDM-K64F (ARM Cortex-M4) con el RTOS µC/OS-III, migrado desde una versión bare-metal con polling a una arquitectura de tareas, semáforos, cola de mensajes y eventos con OSPendMulti. El usuario se identifica con un ID de 8 dígitos, cargado con un encoder rotativo o leído de una tarjeta de banda magnética (track 2, ISO/IEC 7811, con validación de paridad y LRC), y luego ingresa un PIN. Incluye drivers propios para GPIO con interrupciones, timers por software, encoder con decodificación de cuadratura, pulsador con detección de clicks múltiples y largos, display de 7 segmentos multiplexado con 3 niveles de brillo y LEDs de estado, más una máquina de estados con penalizaciones de tiempo y bloqueo al tercer intento fallido.",
+      en: "C firmware for an access control system on the NXP FRDM-K64F board (ARM Cortex-M4) running the µC/OS-III RTOS, migrated from a bare-metal polling version to an architecture of tasks, semaphores, a message queue, and events handled with OSPendMulti. Users identify themselves with an 8-digit ID, entered with a rotary encoder or read from a magnetic stripe card (track 2, ISO/IEC 7811, with parity and LRC validation), and then enter a PIN. It includes custom drivers for interrupt-driven GPIO, software timers, a quadrature-decoding encoder, a push button with multi-click and long-press detection, a multiplexed 7-segment display with 3 brightness levels, and status LEDs, plus a state machine with time penalties and lockout on the third failed attempt.",
+    },
+    media: ["./recurso/Proyectos/ControlAcceso.gif"],
+    github: "https://github.com/cutignolai/Control-de-acceso-TP4",
+    githubTitulo: {
+      es: "Repositorio en GitHub",
+      en: "GitHub repository",
+    },
+    herramientas: ["./recurso/Herramientas/C.png"],
+  },
+  {
+    clase: {
+      es: "Proyecto académico",
+      en: "Academic project",
+    },
+    titulo: {
       es: "Clasificador de colores",
       en: "Color classifier",
     },
