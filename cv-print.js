@@ -1,100 +1,75 @@
 const printParams = new URLSearchParams(window.location.search);
-const storedPrintLanguage = window.localStorage.getItem("cv-language");
-const PRINT_LANGUAGE =
-  window.CV_LANGUAGE === "en" || printParams.get("lang") === "en" || storedPrintLanguage === "en" ? "en" : "es";
+const PRINT_LANGUAGE = window.CV_LANGUAGE === "en" || printParams.get("lang") === "en" ? "en" : "es";
 const printProfile = window.profileData || {};
 const printExperience = Array.isArray(window.experienceData) ? window.experienceData : [];
 const printEducation = Array.isArray(window.educationData) ? window.educationData : [];
 const printProjects = Array.isArray(window.projectsData) ? window.projectsData : [];
+const printTools = window.toolsData || { categorias: [], herramientas: {} };
+const SITE_URL = "https://ignacio-cutignola.com";
 const printTranslations = {
   es: {
-    pageTitle: "CV PDF | Ignacio Cutignola",
+    pageTitle: "Ignacio Cutignola - CV",
     eyebrow: "Curriculum Vitae",
     contact: {
       email: "Email",
-      phone: "Telefono",
+      phone: "Teléfono",
       linkedin: "LinkedIn",
       github: "GitHub",
+      website: "Portfolio",
     },
     sections: {
       profile: "Perfil",
       experience: "Experiencia laboral",
       recognition: "Reconocimientos",
-      education: "Educacion",
+      education: "Educación",
       languages: "Idiomas",
-      stack: "Stack tecnico",
+      stack: "Habilidades técnicas",
       projects: "Proyectos",
     },
     summary:
-      "Soy Ignacio Cutignola, estudiante de Ingenieria Electronica y Tecnico Electronico. Busco seguir ampliando conocimientos y profundizando mi recorrido en entornos donde la electronica, la programacion y el analisis tecnico se conviertan en herramientas concretas para resolver problemas reales.",
+      "Estudiante de Ingeniería Electrónica en el ITBA (85% de la carrera aprobada) y Técnico Electrónico. Actualmente desarrollo firmware y hardware para sistemas embebidos en Prosegur, con experiencia previa en ciberseguridad (Accenture) y desarrollo full stack (Balanz). Como Director-Tutor de la Rama IEEE ITBA diseñé y dicté cursos de programación que llegaron a 430 alumnos. Busco seguir creciendo en roles de firmware, sistemas embebidos y desarrollo de software.",
     recognition: "Beca de honor ITBA",
-    languages: {
-      spanish: "Espanol",
-      spanishLevel: "Nativo",
-      english: "Ingles",
-      englishLevel: "Upper-Intermediate B2",
-      portuguese: "Portugues",
-      portugueseLevel: "Intermedio",
-    },
+    languages: [
+      { name: "Español", level: "Nativo" },
+      { name: "Inglés", level: "Upper-Intermediate (B2)" },
+      { name: "Portugués", level: "Intermedio" },
+    ],
+    tools: "Herramientas",
     profilePhotoAlt: "Foto de perfil de {{name}}",
     logoOf: "Logo de {{label}}",
   },
   en: {
-    pageTitle: "Resume PDF | Ignacio Cutignola",
+    pageTitle: "Ignacio Cutignola - Resume",
     eyebrow: "Resume",
     contact: {
       email: "Email",
       phone: "Phone",
       linkedin: "LinkedIn",
       github: "GitHub",
+      website: "Portfolio",
     },
     sections: {
       profile: "Profile",
       experience: "Work Experience",
-      recognition: "Recognition",
+      recognition: "Honors & Awards",
       education: "Education",
       languages: "Languages",
-      stack: "Technical Stack",
+      stack: "Technical Skills",
       projects: "Projects",
     },
     summary:
-      "I am Ignacio Cutignola, an Electronics Engineering student and Electronics Technician. I am looking to keep expanding my knowledge and deepen my path in environments where electronics, programming, and technical analysis become concrete tools for solving real problems.",
+      "Electronics Engineering student at ITBA (85% of the degree completed) and Electronics Technician. I currently develop firmware and hardware for embedded systems at Prosegur, with previous experience in cybersecurity (Accenture) and full-stack development (Balanz). As Director and Tutor at the IEEE ITBA Student Branch, I designed and taught programming courses that reached 430 students. I am looking to keep growing in firmware, embedded systems, and software development roles.",
     recognition: "ITBA Honors Scholarship",
-    languages: {
-      spanish: "Spanish",
-      spanishLevel: "Native",
-      english: "English",
-      englishLevel: "Upper-Intermediate B2",
-      portuguese: "Portuguese",
-      portugueseLevel: "Intermediate",
-    },
+    languages: [
+      { name: "Spanish", level: "Native" },
+      { name: "English", level: "Upper-Intermediate (B2)" },
+      { name: "Portuguese", level: "Intermediate" },
+    ],
+    tools: "Tools",
     profilePhotoAlt: "Profile photo of {{name}}",
     logoOf: "{{label}} logo",
   },
 };
-const printStack = [
-  { path: "./recurso/Herramientas/python.png", label: "Python" },
-  { path: "./recurso/Herramientas/TypeScript.png", label: "TypeScript" },
-  { path: "./recurso/Herramientas/node.png", label: "Node.js" },
-  { path: "./recurso/Herramientas/angular.png", label: "Angular" },
-  { path: "./recurso/Herramientas/postgres.png", label: "SQL" },
-  { path: "./recurso/Herramientas/redis.png", label: "Redis" },
-  { path: "./recurso/Herramientas/mongodb.png", label: "MongoDB" },
-  { path: "./recurso/Herramientas/C.png", label: "C" },
-  { path: "./recurso/Herramientas/cpp.png", label: "C++" },
-  { path: "./recurso/Herramientas/asm.png", label: "Assembly" },
-  { path: "./recurso/Herramientas/matlab.png", label: "Matlab" },
-  { path: "./recurso/Herramientas/eplan.jpg", label: "Eplan" },
-  { path: "./recurso/Herramientas/latex.png", label: "Latex" },
-  { path: "./recurso/Herramientas/fusion360.png", label: "Fusion360" },
-  { path: "./recurso/Herramientas/arduino.png", label: "Arduino" },
-  { path: "./recurso/Herramientas/raspberry.png", label: "Raspberry" },
-  { path: "./recurso/Herramientas/blender.png", label: "Blender" },
-  { path: "./recurso/Herramientas/altium.png", label: "Altium" },
-  { path: "./recurso/Herramientas/ubuntu.png", label: "Ubuntu" },
-  { path: "./recurso/Herramientas/ltspice.jpg", label: "Ltspice" },
-  { path: "./recurso/Herramientas/linux.png", label: "Linux" },
-];
 
 function pickLocalized(value) {
   if (value && typeof value === "object" && !Array.isArray(value)) {
@@ -115,31 +90,6 @@ function formatPrintText(template, replacements = {}) {
   );
 }
 
-function applyPrintTranslations() {
-  document.documentElement.lang = PRINT_LANGUAGE;
-  document.title = t("pageTitle");
-  setPrintText("#cv-eyebrow", t("eyebrow"));
-  setPrintText("#cv-contact-label-email", t("contact.email"));
-  setPrintText("#cv-contact-label-phone", t("contact.phone"));
-  setPrintText("#cv-contact-label-linkedin", t("contact.linkedin"));
-  setPrintText("#cv-contact-label-github", t("contact.github"));
-  setPrintText("#cv-section-profile", t("sections.profile"));
-  setPrintText("#cv-section-experience", t("sections.experience"));
-  setPrintText("#cv-section-recognition", t("sections.recognition"));
-  setPrintText("#cv-section-education", t("sections.education"));
-  setPrintText("#cv-section-languages", t("sections.languages"));
-  setPrintText("#cv-section-stack", t("sections.stack"));
-  setPrintText("#cv-section-projects", t("sections.projects"));
-  setPrintText("#cv-profile-summary", t("summary"));
-  setPrintText("#cv-recognition-text", t("recognition"));
-  setPrintText("#cv-language-spanish-label", t("languages.spanish"));
-  setPrintText("#cv-language-spanish-level", t("languages.spanishLevel"));
-  setPrintText("#cv-language-english-label", t("languages.english"));
-  setPrintText("#cv-language-english-level", t("languages.englishLevel"));
-  setPrintText("#cv-language-portuguese-label", t("languages.portuguese"));
-  setPrintText("#cv-language-portuguese-level", t("languages.portugueseLevel"));
-}
-
 function setPrintText(selector, value) {
   const element = document.querySelector(selector);
 
@@ -149,54 +99,154 @@ function setPrintText(selector, value) {
 }
 
 function getToolLabel(path) {
+  if (typeof window.getToolName === "function") {
+    return window.getToolName(path, PRINT_LANGUAGE);
+  }
+
   const fileName = String(path || "").split("/").pop() || "";
   return fileName.replace(/\.[^.]+$/, "");
+}
+
+function stripProtocol(url) {
+  return String(url || "")
+    .replace(/^https?:\/\/(www\.)?/, "")
+    .replace(/[?#].*$/, "")
+    .replace(/\/$/, "");
+}
+
+function applyPrintTranslations() {
+  document.documentElement.lang = PRINT_LANGUAGE;
+  document.title = t("pageTitle");
+  setPrintText("#cv-eyebrow", t("eyebrow"));
+  setPrintText("#cv-section-profile", t("sections.profile"));
+  setPrintText("#cv-section-experience", t("sections.experience"));
+  setPrintText("#cv-section-recognition", t("sections.recognition"));
+  setPrintText("#cv-section-education", t("sections.education"));
+  setPrintText("#cv-section-languages", t("sections.languages"));
+  setPrintText("#cv-section-stack", t("sections.stack"));
+  setPrintText("#cv-section-projects", t("sections.projects"));
+  setPrintText("#cv-profile-summary", t("summary"));
+  setPrintText("#cv-recognition-text", t("recognition"));
+}
+
+function createContactItem(label, text, href, icon) {
+  const item = document.createElement("div");
+  const labelElement = document.createElement("span");
+  const value = document.createElement("strong");
+  labelElement.className = icon ? "cv-contact-label-with-icon" : "";
+
+  if (icon) {
+    const image = document.createElement("img");
+    image.src = icon;
+    image.alt = "";
+    labelElement.appendChild(image);
+  }
+
+  labelElement.appendChild(document.createTextNode(`${label}: `));
+
+  if (href) {
+    const link = document.createElement("a");
+    link.href = href;
+    link.textContent = text;
+    value.appendChild(link);
+  } else {
+    value.textContent = text;
+  }
+
+  item.appendChild(labelElement);
+  item.appendChild(value);
+  return item;
 }
 
 function renderPrintHeader() {
   setPrintText("#cv-name", printProfile.nombre || "");
   setPrintText("#cv-role", pickLocalized(printProfile.titulo));
   setPrintText("#cv-location", pickLocalized(printProfile.ubicacion));
-  setPrintText("#cv-email", printProfile.email || "");
-  setPrintText("#cv-phone", printProfile.telefono || "");
-  setPrintText("#cv-linkedin", printProfile.linkedinLabel || "");
-  setPrintText("#cv-github", printProfile.githubLabel || "");
-  setPrintText("#cv-banner-name", printProfile.nombre || "");
-  setPrintText("#cv-banner-role", pickLocalized(printProfile.titulo));
-  setPrintText("#cv-banner-email", printProfile.email || "");
-  setPrintText("#cv-banner-phone", printProfile.telefono || "");
-  setPrintText("#cv-banner-linkedin", printProfile.linkedinLabel || "");
-  setPrintText("#cv-banner-github", printProfile.githubLabel || "");
+
+  const contact = document.querySelector("#cv-contact");
+  if (contact) {
+    contact.innerHTML = "";
+
+    if (printProfile.email) {
+      contact.appendChild(createContactItem(t("contact.email"), printProfile.email, `mailto:${printProfile.email}`));
+    }
+
+    if (printProfile.telefono) {
+      contact.appendChild(
+        createContactItem(
+          t("contact.phone"),
+          printProfile.telefono,
+          `tel:${String(printProfile.telefono).replace(/[^\d+]/g, "")}`
+        )
+      );
+    }
+
+    if (printProfile.linkedin) {
+      const linkedinUrl = printProfile.linkedin.replace(/[?#].*$/, "");
+      contact.appendChild(
+        createContactItem(
+          t("contact.linkedin"),
+          stripProtocol(linkedinUrl),
+          linkedinUrl,
+          "./recurso/Herramientas/linkedin.png"
+        )
+      );
+    }
+
+    if (printProfile.github) {
+      contact.appendChild(
+        createContactItem(
+          t("contact.github"),
+          stripProtocol(printProfile.github),
+          printProfile.github,
+          "./recurso/Herramientas/github-black.png"
+        )
+      );
+    }
+
+    contact.appendChild(createContactItem(t("contact.website"), stripProtocol(SITE_URL), SITE_URL));
+  }
 
   const photoContainer = document.querySelector("#cv-profile-photo");
-  if (photoContainer && printProfile.foto) {
-    photoContainer.innerHTML = `<img src="${printProfile.foto}" alt="${formatPrintText(t("profilePhotoAlt"), {
+  const photo = printProfile.fotoCv || printProfile.foto;
+  if (PRINT_LANGUAGE === "en") {
+    // International resumes usually go without a photo.
+    document.querySelector("#cv-page")?.classList.add("cv-no-photo");
+  } else if (photoContainer && photo) {
+    photoContainer.innerHTML = `<img src="${photo}" alt="${formatPrintText(t("profilePhotoAlt"), {
       name: printProfile.nombre || "perfil",
     })}">`;
   }
 }
 
-function renderStrengths() {
-  const strengths = [
-    "Trabajo en equipo",
-    "Liderazgo",
-    "Consejeria",
-    "Aprendizaje constante",
-    "Comunicacion clara",
-    "Criterio tecnico",
-  ];
-  const container = document.querySelector("#cv-strengths");
-
-  if (!container) {
-    return;
+function createPrintLogo(logo, label, className) {
+  if (logo) {
+    return `
+      <div class="${className}">
+        <img src="${logo}" alt="${formatPrintText(t("logoOf"), { label })}">
+      </div>
+    `;
   }
 
-  container.innerHTML = "";
-  strengths.forEach((strength) => {
-    const item = document.createElement("li");
-    item.textContent = strength;
-    container.appendChild(item);
-  });
+  return `
+    <div class="${className} cv-logo-fallback" aria-hidden="true">${label.slice(0, 2).toUpperCase()}</div>
+  `;
+}
+
+function createPrintDescription(description) {
+  if (Array.isArray(description)) {
+    return `<ul class="cv-bullets">${description.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+  }
+
+  return `<p>${description}</p>`;
+}
+
+function createPrintVideoLink(url, label) {
+  if (!url) {
+    return "";
+  }
+
+  return `<p class="cv-project-link">${pickLocalized(label) || "Video"}: <a href="${url}">${url.replace(/^https?:\/\/(www\.)?/, "")}</a></p>`;
 }
 
 function renderExperience() {
@@ -211,25 +261,21 @@ function renderExperience() {
     const article = document.createElement("article");
     article.className = "cv-experience-item";
     const company = pickLocalized(item.empresa);
-    const logoMarkup = item.logo
-      ? `
-        <div class="cv-experience-logo">
-          <img src="${item.logo}" alt="${formatPrintText(t("logoOf"), { label: company })}">
-        </div>
-      `
+    const tools = Array.isArray(item.logos) ? item.logos.map(getToolLabel).filter(Boolean) : [];
+    const toolsMarkup = tools.length
+      ? `<p class="cv-item-tools"><strong>${t("tools")}:</strong> ${tools.join(", ")}</p>`
       : "";
     article.innerHTML = `
       <div class="cv-experience-item-layout">
-        ${logoMarkup}
+        ${createPrintLogo(item.logo, company, "cv-experience-logo")}
         <div class="cv-experience-item-body">
           <div class="cv-experience-item-header">
-            <div>
-              <h3>${pickLocalized(item.puesto)}</h3>
-              <div class="cv-experience-company">${company}</div>
-              <div class="cv-experience-period">${pickLocalized(item.periodo)}</div>
-            </div>
+            <h3>${pickLocalized(item.puesto)} | ${company}</h3>
+            <div class="cv-experience-period">${pickLocalized(item.periodo)}</div>
           </div>
-          <p>${pickLocalized(item.descripcion)}</p>
+          ${createPrintDescription(pickLocalized(item.descripcion))}
+          ${createPrintVideoLink(item.video, item.videoTitulo)}
+          ${toolsMarkup}
         </div>
       </div>
     `;
@@ -249,60 +295,18 @@ function renderEducation() {
     const article = document.createElement("article");
     article.className = "cv-education-item";
     const institution = pickLocalized(item.institucion);
-    const logoMarkup = item.logo
-      ? `
-        <div class="cv-education-logo">
-          <img src="${item.logo}" alt="${formatPrintText(t("logoOf"), { label: institution })}">
-        </div>
-      `
-      : "";
+    const detail = pickLocalized(item.detalle);
     article.innerHTML = `
-      <div class="cv-education-item-main">
-        ${logoMarkup}
-        <div>
-          <strong>${pickLocalized(item.programa)}</strong>
-          <div class="cv-experience-period">${pickLocalized(item.periodo)}</div>
-          <span>${institution}</span>
+      <div class="cv-experience-item-layout">
+        ${createPrintLogo(item.logo, institution, "cv-education-logo")}
+        <div class="cv-experience-item-body">
+          <div class="cv-experience-item-header">
+            <h3>${pickLocalized(item.programa)} | ${institution}</h3>
+            <div class="cv-experience-period">${pickLocalized(item.periodo)}</div>
+          </div>
+          ${detail ? `<p class="cv-education-detail">${detail}</p>` : ""}
         </div>
       </div>
-    `;
-    container.appendChild(article);
-  });
-}
-
-function renderProjects() {
-  const container = document.querySelector("#cv-projects");
-
-  if (!container) {
-    return;
-  }
-
-  container.innerHTML = "";
-  printProjects.forEach((item) => {
-    const article = document.createElement("article");
-    article.className = "cv-project-item";
-    const toolMarkup = Array.isArray(item.herramientas)
-      ? item.herramientas
-          .slice(0, 5)
-          .map(
-            (tool) => `
-              <span class="cv-project-tool-chip">
-                <img src="${tool}" alt="${getToolLabel(tool)}">
-              </span>
-            `
-          )
-          .join("")
-      : "";
-
-    article.innerHTML = `
-      <div class="cv-project-item-header">
-        <div>
-          <div class="cv-project-type">${pickLocalized(item.clase)}</div>
-          <h3>${pickLocalized(item.titulo)}</h3>
-        </div>
-      </div>
-      <p>${pickLocalized(item.descripcion)}</p>
-      <div class="cv-project-tools">${toolMarkup}</div>
     `;
     container.appendChild(article);
   });
@@ -316,24 +320,80 @@ function renderStack() {
   }
 
   container.innerHTML = "";
-  container.style.gridTemplateColumns = `repeat(${Math.ceil(printStack.length / 2)}, minmax(0, 1fr))`;
-  printStack.forEach((tool) => {
-    const item = document.createElement("div");
-    item.className = "cv-stack-item";
-    item.innerHTML = `<img src="${tool.path}" alt="${tool.label}" title="${tool.label}">`;
+  printTools.categorias.forEach((category) => {
+    const names = category.herramientas
+      .map((key) => printTools.herramientas[key])
+      .filter(Boolean)
+      .map((tool) => pickLocalized(tool.nombre));
+    const row = document.createElement("p");
+    row.className = "cv-skill-row";
+    row.innerHTML = `<strong>${pickLocalized(category.nombre)}:</strong> ${names.join(", ")}`;
+    container.appendChild(row);
+  });
+}
+
+function renderLanguages() {
+  const container = document.querySelector("#cv-languages");
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+  t("languages").forEach((language) => {
+    const item = document.createElement("li");
+    item.innerHTML = `<strong>${language.name}:</strong> ${language.level}`;
     container.appendChild(item);
+  });
+}
+
+function renderProjects() {
+  const container = document.querySelector("#cv-projects");
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+  printProjects.filter((item) => item.enCv !== false).forEach((item) => {
+    const article = document.createElement("article");
+    article.className = "cv-project-item";
+    const toolMarkup = Array.isArray(item.herramientas)
+      ? item.herramientas
+          .map(
+            (tool) => `
+              <span class="cv-project-tool-chip">${getToolLabel(tool)}</span>
+            `
+          )
+          .join("")
+      : "";
+    const videoMarkup =
+      createPrintVideoLink(item.video, item.videoTitulo) +
+      createPrintVideoLink(item.linkedin, item.linkedinTitulo) +
+      createPrintVideoLink(item.github, item.githubTitulo);
+
+    article.innerHTML = `
+      <div class="cv-project-item-header">
+        <h3>${pickLocalized(item.titulo)}</h3>
+        <div class="cv-project-type">${pickLocalized(item.clase)}</div>
+      </div>
+      <p>${pickLocalized(item.descripcionCv || item.descripcion)}</p>
+      ${videoMarkup}
+      <div class="cv-project-tools">${toolMarkup}</div>
+    `;
+    container.appendChild(article);
   });
 }
 
 applyPrintTranslations();
 renderPrintHeader();
-renderStrengths();
 renderExperience();
 renderEducation();
 renderStack();
+renderLanguages();
 renderProjects();
 
-if (new URLSearchParams(window.location.search).get("print") === "1") {
+if (printParams.get("print") === "1") {
   window.addEventListener("load", () => {
     window.setTimeout(() => {
       window.print();

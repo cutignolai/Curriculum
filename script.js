@@ -15,8 +15,9 @@ const profileName = document.querySelector("#profile-name");
 const profileRole = document.querySelector("#profile-role");
 const profileDetails = document.querySelector("#profile-details");
 const contactLinksList = document.querySelector("#contact-links-list");
-const capabilityChips = document.querySelectorAll(".chip-list li");
-const INITIAL_VISIBLE_EXPERIENCES = 3;
+const stackGroups = document.querySelector("#stack-groups");
+const touchDevice = window.matchMedia("(hover: none)").matches;
+const INITIAL_VISIBLE_EXPERIENCES = 4;
 const LANGUAGE_STORAGE_KEY = "cv-language";
 let showingAllExperiences = false;
 let showingAllProjects = false;
@@ -24,9 +25,9 @@ let currentLanguage = "es";
 
 const translations = {
   es: {
-    pageTitle: "Curriculum | Ignacio Cutignola",
+    pageTitle: "Ignacio Cutignola | Firmware y Sistemas Embebidos",
     pageDescription:
-      "Curriculum online de Ignacio Cutignola. Estudiante de Ingenieria Electronica con experiencia en software, sistemas y proyectos tecnicos.",
+      "Currículum online de Ignacio Cutignola. Desarrollador de firmware y sistemas embebidos, estudiante de Ingeniería Electrónica (ITBA), con experiencia en ciberseguridad y desarrollo full stack.",
     nav: {
       profile: "Perfil",
       trajectory: "Trayectoria",
@@ -34,29 +35,29 @@ const translations = {
       capabilities: "Capacidades",
       contact: "Contacto",
     },
-    switchAriaLabel: "Cambiar idioma entre espanol e ingles",
-    heroSectionLabel: "Curriculum / Portfolio",
-    heroAboutTitle: "Sobre mi...",
+    switchAriaLabel: "Cambiar idioma entre español e inglés",
+    heroSectionLabel: "Currículum / Portfolio",
+    heroAboutTitle: "Sobre mí...",
     heroAboutText:
-      "Soy Ignacio Cutignola, estudiante de Ingenieria Electronica y Tecnico Electronico. Me interesa trabajar en proyectos donde la logica, la programacion y la tecnologia se conviertan en herramientas concretas para resolver problemas reales.",
-    heroDownloadAlt: "Descargar curriculum",
-    heroDownloadLabel: "Curriculum",
-    heroDownloadTitle: "Descargar curriculum",
-    heroDownloadText: "Accede a una version PDF de mi CV.",
+      "Soy Ignacio Cutignola, estudiante de Ingeniería Electrónica en el ITBA y Técnico Electrónico. Hoy desarrollo firmware y hardware para sistemas embebidos de seguridad en Prosegur, y antes trabajé en ciberseguridad y desarrollo full stack. Me motiva que la electrónica y el software se conviertan en soluciones concretas para problemas reales.",
+    heroDownloadAlt: "Descargar currículum",
+    heroDownloadLabel: "Currículum",
+    heroDownloadTitle: "Descargar currículum",
+    heroDownloadText: "Accede a una versión PDF de mi CV.",
     overviewLabel: "Perfil",
-    overviewTitle: "Base tecnica, curiosidad y compromiso con aprender haciendo.",
+    overviewTitle: "Del microcontrolador a la plataforma: entiendo el producto de punta a punta.",
     overviewText1:
-      "Busco nuevas experiencias para ampliar conocimientos y profundizar mi recorrido en entornos donde la electronica, la programacion y el analisis tecnico tengan impacto real.",
+      "Combino experiencia en firmware, diseño de PCB, desarrollo full stack y ciberseguridad. Eso me permite trabajar en todas las capas de un sistema: desde el hardware y su comunicación hasta el software que usa el cliente.",
     overviewText2:
-      "Me destaco por adaptarme rapido, trabajar con criterio y recibir feedback como parte natural del proceso para mejorar resultados y elevar el nivel del trabajo.",
+      "Además, diseñé y dicté cursos de programación que llegaron a 430 alumnos y coordiné un equipo de hasta 10 tutores, una experiencia que me formó en liderazgo y comunicación técnica.",
     strengthsLabel: "Fortalezas",
     strengths: [
-      "Trabajo en equipo",
-      "Liderazgo",
-      "Consejeria",
+      "Firmware y sistemas embebidos",
+      "Diseño de PCB",
+      "Desarrollo full stack",
+      "Liderazgo de equipos técnicos",
+      "Comunicación técnica y docencia",
       "Aprendizaje constante",
-      "Pasion por la electronica",
-      "Comunicacion clara",
     ],
     recognitionLabel: "Reconocimientos",
     recognitionText: "Beca de honor ITBA",
@@ -64,27 +65,27 @@ const translations = {
     trajectoryTitle: "Un recorrido por mi experiencia.",
     projectsLabel: "Proyectos",
     projectsTitle: "Mis proyectos y trabajos destacados.",
-    projectsScrollHint: "Desliza para ver mas proyectos",
+    projectsScrollHint: "Desliza para ver más proyectos",
     capabilitiesLabel: "Capacidades",
-    capabilitiesTitle: "Herramientas, idiomas y formacion organizados como un sistema.",
-    stackTitle: "Stack tecnico",
-    educationTitle: "Educacion",
+    capabilitiesTitle: "Herramientas, idiomas y formación organizados como un sistema.",
+    stackTitle: "Stack técnico",
+    educationTitle: "Educación",
     languagesTitle: "Idiomas",
     languageLabels: {
       spanish: "Español",
       spanishLevel: "Nativo",
-      english: "Ingles",
-      portuguese: "Portugues",
+      english: "Inglés",
+      portuguese: "Portugués",
       portugueseLevel: "Intermedio",
       certifications: "Certificaciones",
     },
     contactLabel: "Contacto",
-    contactTitle: "Disponible para sumarme a equipos y proyectos con ambicion tecnica.",
-    contactText: "",
+    contactTitle: "Disponible para sumarme a equipos y proyectos con ambición técnica.",
+    contactText: "Abierto a oportunidades en firmware, sistemas embebidos y desarrollo de software.",
     profileFields: {
       email: "Email",
-      phone: "Telefono",
-      location: "Ubicacion",
+      phone: "Teléfono",
+      location: "Ubicación",
     },
     contactLinks: {
       linkedin: "LinkedIn",
@@ -92,30 +93,32 @@ const translations = {
     },
     buttons: {
       showLess: "Mostrar menos",
-      moreJobs: "Ver {count} puestos mas",
+      moreJobs: "Ver {count} puestos más",
+      moreJob: "Ver 1 puesto más",
       expandProjects: "Expandir {count} proyectos",
+      watchVideo: "← Enlace",
     },
     labels: {
       logoOf: "Logo de {label}",
       mediaOf: "Media de {title}",
       profilePhotoOf: "Foto de perfil de {name}",
-      invalidData: "Datos invalidos",
+      invalidData: "Datos inválidos",
       toolUsedIn: "Herramienta {index} usada en {title}",
     },
     errors: {
       trajectoryTitle: "No se pudo cargar la trayectoria",
       trajectoryText:
-        "Revisa el bloque JSON embebido en el HTML y confirma que tenga un formato valido.",
-      educationTitle: "No se pudo cargar educacion",
-      educationText: "Revisa education-data.js y confirma que tenga un formato valido.",
+        "Revisa experiencia-data.js y confirma que tenga un formato válido.",
+      educationTitle: "No se pudo cargar la educación",
+      educationText: "Revisa education-data.js y confirma que tenga un formato válido.",
       projectsTitle: "No se pudieron cargar los proyectos",
-      projectsText: "Revisa projects-data.js y confirma que tenga un formato valido.",
+      projectsText: "Revisa projects-data.js y confirma que tenga un formato válido.",
     },
   },
   en: {
-    pageTitle: "Resume | Ignacio Cutignola",
+    pageTitle: "Ignacio Cutignola | Firmware & Embedded Systems",
     pageDescription:
-      "Online resume of Ignacio Cutignola. Electronics Engineering student with experience in software, systems, and technical projects.",
+      "Online resume of Ignacio Cutignola. Firmware and embedded systems developer, Electronics Engineering student (ITBA), with experience in cybersecurity and full-stack development.",
     nav: {
       profile: "Profile",
       trajectory: "Experience",
@@ -127,28 +130,28 @@ const translations = {
     heroSectionLabel: "Resume / Portfolio",
     heroAboutTitle: "About me...",
     heroAboutText:
-      "I am Ignacio Cutignola, an Electronics Engineering student and Electronics Technician. I am interested in working on projects where logic, programming, and technology become concrete tools for solving real problems.",
+      "I am Ignacio Cutignola, an Electronics Engineering student at ITBA and Electronics Technician. I currently develop firmware and hardware for embedded security systems at Prosegur, and previously worked in cybersecurity and full-stack development. I am driven by turning electronics and software into concrete solutions for real problems.",
     heroDownloadAlt: "Download resume",
     heroDownloadLabel: "Resume",
     heroDownloadTitle: "Download resume",
     heroDownloadText: "Access a PDF version of my resume.",
     overviewLabel: "Profile",
-    overviewTitle: "Technical foundation, curiosity, and commitment to learning by doing.",
+    overviewTitle: "From the microcontroller to the platform: I understand the product end to end.",
     overviewText1:
-      "I am looking for new experiences to broaden my knowledge and deepen my path in environments where electronics, programming, and technical analysis create real impact.",
+      "I combine experience in firmware, PCB design, full-stack development, and cybersecurity. This lets me work across every layer of a system: from the hardware and its communication to the software the customer uses.",
     overviewText2:
-      "I stand out for adapting quickly, working with good judgment, and taking feedback as a natural part of improving results and raising the quality of the work.",
+      "I also designed and taught programming courses that reached 430 students and coordinated a team of up to 10 tutors, an experience that shaped my leadership and technical communication skills.",
     strengthsLabel: "Strengths",
     strengths: [
-      "Teamwork",
-      "Leadership",
-      "Mentoring",
+      "Firmware & embedded systems",
+      "PCB design",
+      "Full-stack development",
+      "Technical team leadership",
+      "Technical communication & teaching",
       "Continuous learning",
-      "Passion for electronics",
-      "Clear communication",
     ],
     recognitionLabel: "Recognition",
-    recognitionText: "ITBA Honor Scholarship",
+    recognitionText: "ITBA Honors Scholarship",
     trajectoryLabel: "Experience",
     trajectoryTitle: "A journey through my experience.",
     projectsLabel: "Projects",
@@ -169,7 +172,7 @@ const translations = {
     },
     contactLabel: "Contact",
     contactTitle: "Available to join teams and projects with technical ambition.",
-    contactText: "",
+    contactText: "Open to opportunities in firmware, embedded systems, and software development.",
     profileFields: {
       email: "Email",
       phone: "Phone",
@@ -182,7 +185,9 @@ const translations = {
     buttons: {
       showLess: "Show less",
       moreJobs: "View {count} more roles",
+      moreJob: "View 1 more role",
       expandProjects: "Expand {count} projects",
+      watchVideo: "← Link",
     },
     labels: {
       logoOf: "Logo of {label}",
@@ -194,7 +199,7 @@ const translations = {
     errors: {
       trajectoryTitle: "Could not load experience",
       trajectoryText:
-        "Review the embedded JSON block in the HTML and confirm it has a valid format.",
+        "Review experiencia-data.js and confirm it has a valid format.",
       educationTitle: "Could not load education",
       educationText: "Review education-data.js and confirm it has a valid format.",
       projectsTitle: "Could not load projects",
@@ -227,18 +232,6 @@ function observeReveal(element) {
 
 revealedItems.forEach((item) => observeReveal(item));
 
-capabilityChips.forEach((chip) => {
-  const image = chip.querySelector("img");
-  const tooltipText = image?.alt?.trim();
-
-  if (!tooltipText) {
-    return;
-  }
-
-  chip.dataset.tooltip = tooltipText;
-  chip.tabIndex = 0;
-  chip.setAttribute("aria-label", tooltipText);
-});
 
 function getTranslationValue(path) {
   return path.split(".").reduce((value, key) => value?.[key], translations[currentLanguage]);
@@ -337,28 +330,55 @@ function applyLanguage() {
   loadTrajectory();
   loadEducation();
   loadProjects();
+  renderStack();
 }
 
 function openPrintableCv() {
-  const file = currentLanguage === "en" ? "./cv-print-english.html" : "./cv-print.html";
-  window.open(`${file}?print=1`, "_blank", "noopener");
+  const file = currentLanguage === "en" ? "./Ignacio-Cutignola-Resume-EN.pdf" : "./Ignacio-Cutignola-CV-ES.pdf";
+  window.open(file, "_blank", "noopener");
 }
 
-function createHeroDownloadButton() {
-  const button = document.createElement("button");
-  const image = document.createElement("img");
-  const text = document.createElement("span");
-  button.type = "button";
-  button.className = "hero-social-download";
-  button.setAttribute("aria-label", translations[currentLanguage].heroDownloadTitle);
-  image.src = "./recurso/Herramientas/pdf.png";
-  image.alt = "";
-  image.loading = "lazy";
-  text.textContent = translations[currentLanguage].heroDownloadTitle;
-  button.appendChild(image);
-  button.appendChild(text);
-  button.addEventListener("click", openPrintableCv);
-  return button;
+function renderStack() {
+  const data = window.toolsData;
+
+  if (!stackGroups || !data) {
+    return;
+  }
+
+  stackGroups.innerHTML = "";
+  data.categorias.forEach((category) => {
+    const group = document.createElement("div");
+    const heading = document.createElement("h4");
+    const list = document.createElement("ul");
+    group.className = "stack-group";
+    heading.className = "stack-group-title";
+    heading.textContent = localizedText(category.nombre);
+    list.className = "chip-list";
+
+    category.herramientas.forEach((key) => {
+      const tool = data.herramientas[key];
+
+      if (!tool) {
+        return;
+      }
+
+      const name = localizedText(tool.nombre);
+      const item = document.createElement("li");
+      const image = document.createElement("img");
+      item.dataset.tooltip = name;
+      item.tabIndex = 0;
+      item.setAttribute("aria-label", name);
+      image.src = tool.archivo;
+      image.alt = name;
+      image.loading = "lazy";
+      item.appendChild(image);
+      list.appendChild(item);
+    });
+
+    group.appendChild(heading);
+    group.appendChild(list);
+    stackGroups.appendChild(group);
+  });
 }
 
 function isCurrentExperience(periodo) {
@@ -518,6 +538,14 @@ function attachLogoFallback(container, label, selector = ".content-logo img") {
   });
 }
 
+function createDescriptionMarkup(description, listClassName) {
+  if (Array.isArray(description)) {
+    return `<ul class="${listClassName}">${description.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+  }
+
+  return `<p>${description}</p>`;
+}
+
 function createTrajectoryItem(item, index) {
   const article = document.createElement("article");
   article.className = "trajectory-item trajectory-item-reveal";
@@ -545,7 +573,7 @@ function createTrajectoryItem(item, index) {
           <h3>${role} / ${company}</h3>
         </div>
       </div>
-      <p>${description}</p>
+      ${createDescriptionMarkup(description, "trajectory-bullets")}
       ${extraLogosMarkup}
     </div>
   `;
@@ -553,9 +581,16 @@ function createTrajectoryItem(item, index) {
   attachLogoFallback(article, company, ".trajectory-logo img");
 
   const toolsContainer = article.querySelector(".trajectory-tools");
+
+  if (item.video) {
+    article
+      .querySelector(".trajectory-card")
+      .insertBefore(createProjectVideoLink(item.video, localizedText(item.videoTitulo)), toolsContainer);
+  }
+
   if (toolsContainer) {
     item.logos.forEach((path, logoIndex) => {
-      toolsContainer.appendChild(createToolLogo(path, logoIndex, item.empresa));
+      toolsContainer.appendChild(createToolLogo(path, logoIndex, company));
     });
   }
 
@@ -569,7 +604,9 @@ function createEducationItem(item) {
   const institution = localizedText(item.institucion);
   const program = localizedText(item.programa);
   const period = localizedText(item.periodo);
+  const detail = localizedText(item.detalle);
   const logoMarkup = createLogoMarkup(item.logo, institution, "edu-logo");
+  const detailMarkup = detail ? `<span class="edu-item-detail">${detail}</span>` : "";
 
   article.innerHTML = `
     <div class="edu-item-header">
@@ -580,6 +617,7 @@ function createEducationItem(item) {
       </div>
     </div>
     <span>${period}</span>
+    ${detailMarkup}
   `;
 
   attachLogoFallback(article, institution, ".edu-logo img");
@@ -587,6 +625,10 @@ function createEducationItem(item) {
 }
 
 function getFileNameLabel(path) {
+  if (typeof window.getToolName === "function") {
+    return window.getToolName(path, currentLanguage);
+  }
+
   const fileName = String(path || "").split("/").pop() || "";
   return fileName.replace(/\.[^.]+$/, "");
 }
@@ -594,7 +636,6 @@ function getFileNameLabel(path) {
 function isVideoPath(path) {
   return /\.(mp4|webm|ogg)$/i.test(String(path || ""));
 }
-
 function createToolLogo(path, index, title) {
   const item = document.createElement("div");
   const toolLabel = getFileNameLabel(path);
@@ -654,7 +695,7 @@ function setupProjectMedia(article, item) {
   let rotationTimer = null;
 
   const renderMedia = (mediaIndex, { immediate = false } = {}) => {
-    const nextMedia = createProjectMediaElement(mediaList[mediaIndex], item.titulo);
+    const nextMedia = createProjectMediaElement(mediaList[mediaIndex], localizedText(item.titulo));
     const currentMedia = mediaContainer.querySelector(".project-tile-media-layer.is-active");
 
     if (!currentMedia || immediate) {
@@ -699,15 +740,85 @@ function setupProjectMedia(article, item) {
     }, 1800);
   };
 
-  renderMedia(currentMediaIndex, { immediate: true });
+  let mediaLoaded = false;
+  const loadMedia = () => {
+    if (!mediaLoaded) {
+      mediaLoaded = true;
+      renderMedia(currentMediaIndex, { immediate: true });
+    }
+  };
+
   article.classList.add("project-tile-has-media");
 
-  article.addEventListener("mouseenter", startRotation);
+  if (touchDevice) {
+    const mediaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadMedia();
+            startRotation();
+          } else {
+            stopRotation();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    mediaObserver.observe(article);
+    return;
+  }
+
+  article.addEventListener("mouseenter", () => {
+    loadMedia();
+    startRotation();
+  });
   article.addEventListener("mouseleave", () => {
     stopRotation();
-    currentMediaIndex = 0;
-    renderMedia(currentMediaIndex);
+
+    if (currentMediaIndex !== 0) {
+      currentMediaIndex = 0;
+      renderMedia(currentMediaIndex);
+    }
   });
+}
+
+function createProjectVideoLink(url, label = "") {
+  const link = document.createElement("a");
+  link.href = url;
+  link.className = "project-video-link";
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.setAttribute("aria-label", label ? `YouTube: ${label}` : "YouTube");
+  link.innerHTML = `
+    <svg class="project-video-link-logo" viewBox="0 0 28 20" aria-hidden="true">
+      <rect width="28" height="20" rx="6" fill="#ff0000"></rect>
+      <path d="M11 5.5v9l8-4.5z" fill="#ffffff"></path>
+    </svg>
+    <span>${translations[currentLanguage].buttons.watchVideo}</span>
+  `;
+  return link;
+}
+
+function createProjectIconLink(url, brand, iconPath, label = "") {
+  const link = document.createElement("a");
+  link.href = url;
+  link.className = "project-video-link";
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.setAttribute("aria-label", label ? `${brand}: ${label}` : brand);
+  link.innerHTML = `
+    <img class="project-video-link-logo project-link-logo-square" src="${iconPath}" alt="" aria-hidden="true">
+    <span>${translations[currentLanguage].buttons.watchVideo}</span>
+  `;
+  return link;
+}
+
+function createProjectLinkedInLink(url, label = "") {
+  return createProjectIconLink(url, "LinkedIn", "./recurso/Herramientas/linkedin.png", label);
+}
+
+function createProjectGitHubLink(url, label = "") {
+  return createProjectIconLink(url, "GitHub", "./recurso/Herramientas/github.png", label);
 }
 
 function createProjectCard(item, index) {
@@ -739,6 +850,18 @@ function createProjectCard(item, index) {
     toolsContainer.classList.add("project-tools-empty");
   }
 
+  if (item.video) {
+    toolsContainer.appendChild(createProjectVideoLink(item.video, localizedText(item.videoTitulo)));
+  }
+
+  if (item.linkedin) {
+    toolsContainer.appendChild(createProjectLinkedInLink(item.linkedin, localizedText(item.linkedinTitulo)));
+  }
+
+  if (item.github) {
+    toolsContainer.appendChild(createProjectGitHubLink(item.github, localizedText(item.githubTitulo)));
+  }
+
   setupProjectMedia(article, item);
 
   return article;
@@ -757,7 +880,7 @@ function createToggleButton(hiddenCount) {
     `;
   } else {
     button.innerHTML = `
-      <span>${formatTranslation("buttons.moreJobs", { count: hiddenCount })}</span>
+      <span>${hiddenCount === 1 ? translations[currentLanguage].buttons.moreJob : formatTranslation("buttons.moreJobs", { count: hiddenCount })}</span>
       <span class="trajectory-toggle-icon" aria-hidden="true">↓</span>
     `;
   }
@@ -1031,7 +1154,7 @@ function renderProfile(data) {
     }
 
     if (data.telefono) {
-      contactLinksList.appendChild(createContactLink("https://wa.me/5491164074647", "Whatsapp"));
+      contactLinksList.appendChild(createContactLink("https://wa.me/5491164074647", "WhatsApp"));
     }
 
     if (data.linkedin) {
@@ -1053,7 +1176,7 @@ function loadTrajectory() {
     const data = window.experienceData;
 
     if (!Array.isArray(data)) {
-      throw new Error("Formato invalido");
+      throw new Error("Formato inválido");
     }
 
     const sortedData = sortExperiences(data);
@@ -1070,7 +1193,7 @@ function loadEducation() {
     const data = window.educationData;
 
     if (!Array.isArray(data)) {
-      throw new Error("Formato invalido");
+      throw new Error("Formato inválido");
     }
 
     renderEducation(data);
@@ -1085,7 +1208,7 @@ function loadProjects() {
     const data = window.projectsData;
 
     if (!Array.isArray(data)) {
-      throw new Error("Formato invalido");
+      throw new Error("Formato inválido");
     }
 
     renderProjects(data);
@@ -1100,7 +1223,7 @@ function loadProfile() {
     const data = window.profileData;
 
     if (!data || typeof data !== "object") {
-      throw new Error("Formato invalido");
+      throw new Error("Formato inválido");
     }
 
     renderProfile(data);

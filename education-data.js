@@ -1,21 +1,25 @@
 
 window.educationData = [
   {
-    institucion: "Instituto Tecnologico de Buenos Aires",
+    institucion: "Instituto Tecnológico de Buenos Aires",
     programa: {
-      es: "Ingenieria Electronica",
+      es: "Ingeniería Electrónica",
       en: "Electronics Engineering",
     },
     periodo: {
       es: "2017 - Actualidad",
       en: "2017 - Present",
     },
+    detalle: {
+      es: "85% de la carrera aprobada",
+      en: "85% of the degree completed",
+    },
     logo: "./recurso/Educacion/itba.png",
   },
   {
-    institucion: "Escuela Cristiana Evangelica Argentina",
+    institucion: "Escuela Cristiana Evangélica Argentina",
     programa: {
-      es: "Tecnico Electronico",
+      es: "Técnico Electrónico",
       en: "Electronics Technician",
     },
     periodo: {
