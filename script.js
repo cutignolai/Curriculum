@@ -41,17 +41,17 @@ const translations = {
     heroSectionLabel: "Currículum / Portfolio",
     heroAboutTitle: "Sobre mí...",
     heroAboutText:
-      "Soy Ignacio Cutignola, estudiante de Ingeniería Electrónica en el ITBA y Técnico Electrónico. Hoy desarrollo firmware y hardware para sistemas embebidos de seguridad en Prosegur, y antes trabajé en ciberseguridad y desarrollo full stack. Me motiva que la electrónica y el software se conviertan en soluciones concretas para problemas reales.",
+      "Soy Ignacio Cutignola, estudiante de Ingeniería Electrónica en el ITBA y Técnico Electrónico. Hoy desarrollo firmware y hardware para sistemas embebidos de seguridad en Prosegur, y antes trabajé en ciberseguridad y desarrollo full stack. Me interesa que la electrónica y el software resuelvan problemas concretos.",
     heroDownloadAlt: "Descargar currículum",
     heroDownloadLabel: "Currículum",
     heroDownloadTitle: "Descargar currículum",
     heroDownloadText: "Accede a una versión PDF de mi CV.",
     overviewLabel: "Perfil",
-    overviewTitle: "Del microcontrolador a la plataforma: entiendo el producto de punta a punta.",
+    overviewTitle: "Escribo firmware, diseño placas y construyo lo que usa el cliente.",
     overviewText1:
-      "Combino experiencia en firmware, diseño de PCB, desarrollo full stack y ciberseguridad. Eso me permite trabajar en todas las capas de un sistema: desde el hardware y su comunicación hasta el software que usa el cliente.",
+      "Combino experiencia en firmware, diseño de PCB, desarrollo full stack y ciberseguridad. Diseño PCB de cuatro capas.",
     overviewText2:
-      "Además, diseñé y dicté cursos de programación que llegaron a 430 alumnos y coordiné un equipo de hasta 10 tutores, una experiencia que me formó en liderazgo y comunicación técnica.",
+      "Además, diseñé y dicté cursos de programación a los que llegaron 430 alumnos, y coordiné un equipo de hasta 10 tutores. Eso me dio práctica en liderazgo y en explicar temas técnicos.",
     strengthsLabel: "Fortalezas",
     strengths: [
       "Firmware y sistemas embebidos",
@@ -82,7 +82,7 @@ const translations = {
       certifications: "Certificaciones",
     },
     contactLabel: "Contacto",
-    contactTitle: "Disponible para sumarme a equipos y proyectos con ambición técnica.",
+    contactTitle: "Disponible para sumarme a equipos y proyectos técnicos.",
     contactText: "Abierto a oportunidades en firmware, sistemas embebidos y desarrollo de software.",
     profileFields: {
       email: "Email",
@@ -134,17 +134,17 @@ const translations = {
     heroSectionLabel: "Resume / Portfolio",
     heroAboutTitle: "About me...",
     heroAboutText:
-      "I am Ignacio Cutignola, an Electronics Engineering student at ITBA and Electronics Technician. I currently develop firmware and hardware for embedded security systems at Prosegur, and previously worked in cybersecurity and full-stack development. I am driven by turning electronics and software into concrete solutions for real problems.",
+      "I am Ignacio Cutignola, an Electronics Engineering student at ITBA and Electronics Technician. I currently develop firmware and hardware for embedded security systems at Prosegur, and previously worked in cybersecurity and full-stack development. I am interested in electronics and software solving concrete problems.",
     heroDownloadAlt: "Download resume",
     heroDownloadLabel: "Resume",
     heroDownloadTitle: "Download resume",
     heroDownloadText: "Access a PDF version of my resume.",
     overviewLabel: "Profile",
-    overviewTitle: "From the microcontroller to the platform: I understand the product end to end.",
+    overviewTitle: "I write firmware, design boards, and build what the customer uses.",
     overviewText1:
-      "I combine experience in firmware, PCB design, full-stack development, and cybersecurity. This lets me work across every layer of a system: from the hardware and its communication to the software the customer uses.",
+      "I combine experience in firmware, PCB design, full-stack development, and cybersecurity. I design four-layer PCBs.",
     overviewText2:
-      "I also designed and taught programming courses that reached 430 students and coordinated a team of up to 10 tutors, an experience that shaped my leadership and technical communication skills.",
+      "I also designed and taught programming courses that reached 430 students, and coordinated a team of up to 10 tutors. That gave me practice in leadership and in explaining technical topics.",
     strengthsLabel: "Strengths",
     strengths: [
       "Firmware & embedded systems",
@@ -175,7 +175,7 @@ const translations = {
       certifications: "Certifications",
     },
     contactLabel: "Contact",
-    contactTitle: "Available to join teams and projects with technical ambition.",
+    contactTitle: "Available to join technical teams and projects.",
     contactText: "Open to opportunities in firmware, embedded systems, and software development.",
     profileFields: {
       email: "Email",

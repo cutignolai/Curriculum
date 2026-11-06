@@ -124,8 +124,8 @@ window.projectsData = [
       en: "Robotic arm that draws from images",
     },
     descripcion: {
-      es: "Junto con mi grupo de la universidad, implementamos un brazo robot al cual se le envía la imagen de un dibujo y tiene la capacidad de interpretarlo y replicarlo.",
-      en: "Together with my university team, we implemented a robotic arm that receives an image of a drawing and is able to interpret and replicate it.",
+      es: "Junto con mi grupo de la universidad implementamos un brazo robot: recibe la imagen de un dibujo, lo interpreta y lo replica.",
+      en: "Together with my university team, we built a robotic arm that receives an image of a drawing, interprets it, and replicates it.",
     },
     media: [
       "./recurso/Proyectos/Brazo.jpeg",
